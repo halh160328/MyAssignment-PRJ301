@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import model.Lectuter;
 
 public class LoginController extends HttpServlet {
@@ -18,21 +19,24 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Lectuter> lecs = new ArrayList<>();
         Lectuter lec = new Lectuter();
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         LectuterDBContext db = new LectuterDBContext();
         lec = db.checkInfo(email, pass);
         if (lec != null) {
-            response.getWriter().println("Login success");
+            lecs.add(lec);
+            request.setAttribute("lecs", lecs);
+            request.getRequestDispatcher("timetable.jsp").forward(request, response);
         } else {
-            response.getWriter().println("Login Failed");
+            response.sendRedirect("login.jsp");
         }
     }
 

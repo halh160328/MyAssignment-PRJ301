@@ -28,6 +28,8 @@ public class LectuterDBContext extends DBContext {
                 Lectuter l = new Lectuter();
                 l.setEmail(rs.getString("Email"));
                 l.setPassword(rs.getString("Password"));
+                l.setUserName(rs.getString("UserName"));
+                l.setName(rs.getString("LectuterName"));
                 return l;
             }
         } catch (SQLException ex) {

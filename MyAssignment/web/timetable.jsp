@@ -1,14 +1,16 @@
+<%-- 
+    Document   : timetable
+    Created on : Jul 12, 2022, 1:20:07 AM
+    Author     : Admin
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="timetable.css"  rel="stylesheet" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <style>
             td {
                 border: 1px solid;
@@ -17,13 +19,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </head>
     <body style="margin: 0px">
         <div>
-            <p style="font-size: 36px;font-family: helvetica neue;width: 100%;height: 50px;background-color: red;margin: 0px">Username's Timetable</p>
+            <c:forEach items="${requestScope.lecs}" var="l">
+                <p style="font-size: 36px;font-family: helvetica neue;width: 100%;height: 50px;background-color: red;margin: 0px">${l.userName}'s Timetable</p>
+            </c:forEach>
         </div>
         <form action="dal" method="Get">
             <div  style="background-color: #f8e1ac">
                 <div style="text-align: center">
-                    <input class="username_border" type="text" value="Username"/>
-
+                    <c:forEach items="${requestScope.lecs}" var="l">
+                        <input style="text-align: center" type="text" value="${l.userName}"/>
+                    </c:forEach>
                     <table style="margin-left: auto;margin-right: auto;width: 100%">
                         <thead>
                             <tr>
@@ -38,6 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </tr>
                         </thead>
                         <tbody>
+                            
                             <tr>
                                 <td style="text-align: left">Slot 1</td>
                                 <td style="text-align: left">CourseId<br>GroupID<br><a href="take_attend" style="color: green;font-size: 15px">take attend</a></td>
