@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Lectuter;
 import model.Slot;
@@ -38,19 +39,19 @@ public class TimetableController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         SlotDBContext sdb = new SlotDBContext();
-        Slot slot = new Slot();
         ArrayList<Slot> slots = new ArrayList<>();
-        slot = sdb.slotList();
-        slots.add(slot);
+        slots = sdb.slotList();
         request.setAttribute("slots", slots);
+        request.setAttribute("lecs", session.getAttribute("lecs"));
         request.getRequestDispatcher("timetable.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
     }
 
     @Override

@@ -18,7 +18,8 @@ import model.Slot;
  */
 public class SlotDBContext extends DBContext {
 
-    public Slot slotList() {
+    public ArrayList<Slot> slotList() {
+        ArrayList<Slot> list = new ArrayList<>();
         try {
             String sql = "select * from Slot";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -28,11 +29,11 @@ public class SlotDBContext extends DBContext {
                 slot.setSlotID(rs.getString("SlotID"));
                 slot.setStart(rs.getTime("TimeStart"));
                 slot.setEnd(rs.getTime("TimeEnd"));
-                return slot;
+                list.add(slot);
             }
         } catch (SQLException ex) {
             Logger.getLogger(SlotDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return list;
     }
 }
