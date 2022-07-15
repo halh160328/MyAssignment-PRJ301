@@ -30,22 +30,20 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
         ArrayList<Lectuter> lecs = new ArrayList<>();
         Lectuter lec = new Lectuter();
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         LectuterDBContext db = new LectuterDBContext();
         lec = db.checkInfo(email, pass);
-
         if (lec != null) {
             lecs.add(lec);
             session.setAttribute("lecs", lecs);
+            session.setAttribute("lec", lec);
+            response.sendRedirect(request.getContextPath() + "/timetable");
         } else {
             response.sendRedirect("login.jsp");
         }
-        response.sendRedirect(request.getContextPath()+"/timetable");
-      
     }
 
     @Override

@@ -4,13 +4,13 @@
  */
 package model;
 
-import java.util.ArrayList;
-
-public class TimeTable {
+public class Timetable {
 
     private int id;
     private String day;
-    private ArrayList<Slot> slots;
+    private Course course;
+    private Group group;
+    private Slot slot;
 
     public int getId() {
         return id;
@@ -28,12 +28,28 @@ public class TimeTable {
         this.day = day;
     }
 
-    public ArrayList<Slot> getSlots() {
-        return slots;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setSlots(ArrayList<Slot> slots) {
-        this.slots = slots;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Slot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
+    
 }

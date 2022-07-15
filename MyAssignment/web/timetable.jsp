@@ -47,6 +47,27 @@
                             <c:forEach items="${requestScope.slots}" var="slot">
                                 <tr>
                                     <td style="text-align: left">${slot.slotID}</td>
+                                    <c:forEach items="${requestScope.monday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}<br/>${m.group.groupName}<br/></td>
+                                        </c:forEach>
+                                        <c:forEach items="${requestScope.tuesday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}<br/>${m.group.groupName}</td>
+                                        </c:forEach>
+                                        <c:forEach items="${requestScope.wednesday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    </c:forEach>
+                                    <c:forEach items="${requestScope.thursday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    </c:forEach>
+                                    <c:forEach items="${requestScope.friday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    </c:forEach>
+                                    <c:forEach items="${requestScope.saturday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    </c:forEach>
+                                    <c:forEach items="${requestScope.sunday}" var="m">
+                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    </c:forEach>
                                 </tr>
                             </c:forEach>
                         </tbody>

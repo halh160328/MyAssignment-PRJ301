@@ -26,6 +26,7 @@ public class LectuterDBContext extends DBContext {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Lectuter l = new Lectuter();
+                l.setId(rs.getInt("LectuterID"));
                 l.setEmail(rs.getString("Email"));
                 l.setPassword(rs.getString("Password"));
                 l.setUserName(rs.getString("UserName"));
