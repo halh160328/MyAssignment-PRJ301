@@ -7,19 +7,32 @@ package controller;
 import dal.LectuterDBContext;
 import dal.SlotDBContext;
 import dal.TimetableDBContext;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import model.Lectuter;
 import model.Slot;
 import model.Timetable;
 
 public class TimetableController extends HttpServlet {
+
+    private static final String MONDAY = "Monday";
+    private static final String TUESDAY = "Tuesday";
+    private static final String WEDNESDAY = "Wednesday";
+    private static final String THURSDAY = "Thursday";
+    private static final String FRIDAY = "Friday";
+    private static final String SATURDAY = "Saturday";
+    private static final String SUNDAY = "Sunday";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,44 +69,14 @@ public class TimetableController extends HttpServlet {
         ArrayList<Timetable> friday = new ArrayList<>();
         ArrayList<Timetable> saturday = new ArrayList<>();
         ArrayList<Timetable> sunday = new ArrayList<>();
-        for (Timetable t : time_table) {
-            if (t.getDay().equalsIgnoreCase("Monday")) {
-                t.getCourse();
-                t.getGroup();
-                monday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Tuesday")) {
-                t.getCourse();
-                t.getGroup();
-                tuesday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Wednesday")) {
-                t.getCourse();
-                t.getGroup();
-                wednesday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Thursday")) {
-                t.getCourse();
-                t.getGroup();
-                thursday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Friday")) {
-                t.getCourse();
-                t.getGroup();
-                friday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Saturday")) {
-                t.getCourse();
-                t.getGroup();
-                saturday.add(t);
-            } else if (t.getDay().equalsIgnoreCase("Sunday")) {
-                t.getCourse();
-                t.getGroup();
-                sunday.add(t);
-            }
-        }
-        request.setAttribute("monday", monday);
-        request.setAttribute("tuesday", tuesday);
-        request.setAttribute("wednesday", wednesday);
-        request.setAttribute("thursday", thursday);
-        request.setAttribute("friday", friday);
-        request.setAttribute("saturday", saturday);
-        request.setAttribute("sunday", sunday);
+        divideTimeTable(time_table, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+        request.setAttribute(MONDAY, monday);
+        request.setAttribute(TUESDAY, tuesday);
+        request.setAttribute(WEDNESDAY, wednesday);
+        request.setAttribute(THURSDAY, thursday);
+        request.setAttribute(FRIDAY, friday);
+        request.setAttribute(SATURDAY, saturday);
+        request.setAttribute(SUNDAY, sunday);
         request.setAttribute("slots", slots);
         request.setAttribute("lecs", session.getAttribute("lecs"));
         request.getRequestDispatcher("timetable.jsp").forward(request, response);
@@ -110,4 +93,40 @@ public class TimetableController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void divideTimeTable(List<Timetable> lstTimeTable,
+            List<Timetable> lstTimeTableMonday,
+            List<Timetable> lstTimeTableTuesday,
+            List<Timetable> lstTimeTableWednesday,
+            List<Timetable> lstTimeTableThursday,
+            List<Timetable> lstTimeTableFriday,
+            List<Timetable> lstTimeTableSaturday,
+            List<Timetable> lstTimeTableSunday) {
+        for (Timetable t : lstTimeTable) {
+            switch (t.getDay()) {
+                case MONDAY:
+                    lstTimeTableMonday.add(t);
+                    break;
+                case TUESDAY:
+                    lstTimeTableTuesday.add(t);
+                    break;
+                case WEDNESDAY:
+                    lstTimeTableWednesday.add(t);
+                    break;
+                case THURSDAY:
+                    lstTimeTableThursday.add(t);
+                    break;
+                case FRIDAY:
+                    lstTimeTableFriday.add(t);
+                    break;
+                case SATURDAY:
+                    lstTimeTableSaturday.add(t);
+                    break;
+                case SUNDAY:
+                    lstTimeTableSunday.add(t);
+                    break;
+                default:
+                    System.out.println("Some error when divide time table");
+            }
+        }
+    }
 }

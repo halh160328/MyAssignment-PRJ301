@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +20,13 @@
     <body style="margin: 0px">
         <div>
             <c:forEach items="${requestScope.lecs}" var="l">
-                <p style="font-size: 36px;font-family: helvetica neue;width: 100%;height: 50px;background-color: red;margin: 0px">${l.userName}'s Timetable</p>
-            </c:forEach>
+                <p style="font-size: 36px;font-family: helvetica neue;width: 100%;height: 50px;background-color: red;margin: 0px">${l.userName}'s
+                    Timetable</p>
+                </c:forEach>
 
         </div>
         <form action="timetable" method="POST">
-            <div  style="background-color: #f8e1ac">
+            <div style="background-color: #f8e1ac">
                 <div style="text-align: center">
                     <c:forEach items="${requestScope.lecs}" var="l">
                         <input style="text-align: center" type="text" value="${l.userName}"/>
@@ -47,27 +48,111 @@
                             <c:forEach items="${requestScope.slots}" var="slot">
                                 <tr>
                                     <td style="text-align: left">${slot.slotID}</td>
-                                    <c:forEach items="${requestScope.monday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}<br/>${m.group.groupName}<br/></td>
-                                        </c:forEach>
-                                        <c:forEach items="${requestScope.tuesday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}<br/>${m.group.groupName}</td>
-                                        </c:forEach>
-                                        <c:forEach items="${requestScope.wednesday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Monday}" var="monday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (monday.slot.slotID)}">
+                                                <td style="text-align: center">${monday.course.courseID}<br/>${monday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                    <c:forEach items="${requestScope.thursday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    <c:if test="${count == (requestScope.Monday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Tuesday}" var="tuesday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (tuesday.slot.slotID)}">
+                                                <td style="text-align: center">${tuesday.course.courseID}<br/>${tuesday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                    <c:forEach items="${requestScope.friday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    <c:if test="${count == (requestScope.Tuesday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Wednesday}" var="wednesday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (wednesday.slot.slotID)}">
+                                                <td style="text-align: center">${wednesday.course.courseID}<br/>${wednesday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                    <c:forEach items="${requestScope.saturday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    <c:if test="${count == (requestScope.Wednesday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Thursday}" var="thursday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (thursday.slot.slotID)}">
+                                                <td style="text-align: center">${thursday.course.courseID}<br/>${thursday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                    <c:forEach items="${requestScope.sunday}" var="m">
-                                        <td style="text-align: center">${m.course.courseID}</td>
+                                    <c:if test="${count == (requestScope.Thursday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Friday}" var="friday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (friday.slot.slotID)}">
+                                                <td style="text-align: center">${friday.course.courseID}<br/>${friday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
+                                    <c:if test="${count == (requestScope.Friday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Saturday}" var="saturday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (saturday.slot.slotID)}">
+                                                <td style="text-align: center">${saturday.course.courseID}<br/>${saturday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${count == (requestScope.Saturday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
+                                    <c:set var="count" value="${0}" />
+                                    <c:forEach items="${requestScope.Sunday}" var="sunday">
+                                        <c:choose>
+                                            <c:when test="${slot.slotID eq (sunday.slot.slotID)}">
+                                                <td style="text-align: center">${sunday.course.courseID}<br/>${sunday.group.groupName}<br/>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="count" value="${count+1}" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${count == (requestScope.Sunday.size())}">
+                                        <td style="text-align: left"></td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -78,7 +163,8 @@
     </body>
     <footer style="padding-top: 15px">
         <div>
-            <p style="text-align: center; font-size: 20px">Mọi thắc mắc xin liên hệ: <a href="abc.jsp">truongdoi123@gmail.edu.vn</a> </p>
+            <p style="text-align: center; font-size: 20px">Mọi thắc mắc xin liên hệ: <a href="abc.jsp">truongdoi123@gmail.edu.vn</a>
+            </p>
         </div>
     </footer>
 </html>
