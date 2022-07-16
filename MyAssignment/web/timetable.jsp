@@ -53,6 +53,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (monday.slot.slotID)}">
                                                 <td style="text-align: center">${monday.course.courseID}<br/>${monday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${monday.course.courseID}&gid=${monday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -68,6 +69,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (tuesday.slot.slotID)}">
                                                 <td style="text-align: center">${tuesday.course.courseID}<br/>${tuesday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${tuesday.course.courseID}&gid=${tuesday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -83,6 +85,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (wednesday.slot.slotID)}">
                                                 <td style="text-align: center">${wednesday.course.courseID}<br/>${wednesday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${wednesday.course.courseID}&gid=${wednesday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -98,6 +101,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (thursday.slot.slotID)}">
                                                 <td style="text-align: center">${thursday.course.courseID}<br/>${thursday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${thursday.course.courseID}&gid=${thursday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -113,6 +117,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (friday.slot.slotID)}">
                                                 <td style="text-align: center">${friday.course.courseID}<br/>${friday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${friday.course.courseID}&gid=${friday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -128,6 +133,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (saturday.slot.slotID)}">
                                                 <td style="text-align: center">${saturday.course.courseID}<br/>${saturday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${saturday.course.courseID}&gid=${saturday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -143,6 +149,7 @@
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (sunday.slot.slotID)}">
                                                 <td style="text-align: center">${sunday.course.courseID}<br/>${sunday.group.groupName}<br/>
+                                                    <a href="attendance?cid=${sunday.course.courseID}&gid=${sunday.group.groupID}">take-attend</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>

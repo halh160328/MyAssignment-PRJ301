@@ -77,9 +77,11 @@ public class TimetableController extends HttpServlet {
         request.setAttribute(FRIDAY, friday);
         request.setAttribute(SATURDAY, saturday);
         request.setAttribute(SUNDAY, sunday);
+        session.setAttribute("timetable", time_table);
         request.setAttribute("slots", slots);
         request.setAttribute("lecs", session.getAttribute("lecs"));
         request.getRequestDispatcher("timetable.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/timetable");
     }
 
     @Override

@@ -36,10 +36,12 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String cID = request.getParameter("cid");
+        int gID = Integer.parseInt(request.getParameter("gid"));
         AttendanceDBContext adb = new AttendanceDBContext();
-        String cid = request.getParameter("courseID");
-        int gid = Integer.parseInt(request.getParameter("groupID"));
-        ArrayList<Student> students = adb.listStudent(cid, gid);
+        ArrayList<Student> studentList = adb.listStudent(cID, gID);
+        request.setAttribute("listStudent", studentList);
+        request.getRequestDispatcher("attendance.jsp").forward(request, response);
     }
 
     @Override
@@ -48,11 +50,6 @@ public class AttendanceController extends HttpServlet {
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

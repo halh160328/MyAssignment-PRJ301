@@ -20,11 +20,11 @@ import model.Timetable;
  * @author Admin
  */
 public class TimetableDBContext extends DBContext {
-    
+
     public ArrayList<model.Timetable> listByLecID(int id) {
         ArrayList<Timetable> list = new ArrayList<>();
         try {
-            String sql = "select tt.Day, tt.SlotID,cg.CourseID, g.GroupName from Timetable tt join CourseGroup cg \n"
+            String sql = "select tt.Day, tt.SlotID,cg.CourseID, g.GroupName,g.GroupID from Timetable tt join CourseGroup cg \n"
                     + "on tt.CourseGroupID = cg.ID join [Group] g on cg.GroupID = g.GroupID where cg.LectuterID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
@@ -35,6 +35,7 @@ public class TimetableDBContext extends DBContext {
                 c.setCourseID(rs.getString("CourseID"));
                 Group g = new Group();
                 g.setGroupName(rs.getString("GroupName"));
+                g.setGroupID(rs.getInt("GroupID"));
                 Slot s = new Slot();
                 s.setSlotID(rs.getString("SlotID"));
                 tt.setDay(rs.getString("Day"));
