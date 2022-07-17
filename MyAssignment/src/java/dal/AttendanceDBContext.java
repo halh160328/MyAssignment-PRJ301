@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Attendance;
+import model.Group;
 import model.Student;
 
 public class AttendanceDBContext extends DBContext {
@@ -38,5 +40,41 @@ public class AttendanceDBContext extends DBContext {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public ArrayList<Group> groupList(int id) {
+        ArrayList<Group> list = new ArrayList<>();
+        try {
+            String sql = "select * from [Group] where GroupID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                g.setGroupName(rs.getString("GroupName"));
+                list.add(g);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public void insert(Attendance att) {
+        try {
+            String sql = "INSERT INTO [AttendanceTaking]\n"
+                    + "           ([StudentID]\n"
+                    + "           ,[Note]\n"
+                    + "           ,[Attendance])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, att.getStudent().getId());
+            stm.setString(2, att.getNote());
+            stm.setBoolean(3, att.isAttendance());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -20,12 +20,16 @@
     </head>
     <body>
         <form action="attendance" method="POST">
+            <input type="hidden" name="cid" value="${requestScope.cid}"/>
+            <input type="hidden" name="gid" value="${requestScope.gid}"/>
             <div style="font-size: 40px; text-align: left">
                 Attendance Taking
             </div>
-            <div style="margin-top: 30px;text-align: center;font-size: 40px">
-                GroupID's Student List
-            </div>
+            <c:forEach items="${requestScope.listGroup}" var="g">
+                <div style="margin-top: 30px;text-align: center;font-size: 40px">
+                    ${g.groupName}'s Student List
+                </div>
+            </c:forEach>
             <div>
                 <table style="margin-left: auto;margin-right: auto;width: 100%">
                     <thead>
@@ -41,17 +45,18 @@
                     <tbody>
                         <c:set var="count" value="${1}" />
                         <c:forEach items="${requestScope.listStudent}" var="s">
-                            <tr>
+                            <tr>                            
                                 <td class="td_index">${count}</td>
                                 <td>${s.id}</td>
-                                <td>${s.gender}</td>
-                                <td>${s.name}</td>               
-                                <td><input type="radio" name="attend" value="yes" /> YES
-                                    <input type="radio" name="attend" value="no"/>NO</td>
-                                <td><input type="text"/></td>
-                            </tr>
-                            <c:set var="count" value="${count+1}" />
-                        </c:forEach>
+                        <input type="hidden" name="sid" value="${s.id}"/>
+                        <td>${s.gender}</td>
+                        <td>${s.name}</td>               
+                        <td><input type="radio" name="attend${s.id}" value="yes" /> YES
+                            <input checked="checked" type="radio" name="attend${s.id}" value="no"/>NO</td>
+                        <td><input type="text" name="note"/></td>
+                        </tr>
+                        <c:set var="count" value="${count+1}" />                    
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
