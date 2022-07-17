@@ -47,12 +47,12 @@
                         <c:forEach items="${requestScope.listStudent}" var="s">
                             <tr>                            
                                 <td class="td_index">${count}</td>
-                                <td>${s.id}</td>
-                        <input type="hidden" name="sid" value="${s.id}"/>
-                        <td>${s.gender}</td>
-                        <td>${s.name}</td>               
-                        <td><input type="radio" name="attend${s.id}" value="yes" /> YES
-                            <input checked="checked" type="radio" name="attend${s.id}" value="no"/>NO</td>
+                                <td>${s.student.id}</td>
+                        <input type="hidden" name="sid" value="${s.student.id}"/>
+                        <td>${s.student.gender}</td>
+                        <td>${s.student.name}</td>               
+                        <td><input type="radio" name="attend${s.student.id}" value="yes" /> YES
+                            <input checked="checked" type="radio" name="attend${s.student.id}" value="no"/>NO</td>
                         <td><input type="text" name="note"/></td>
                         </tr>
                         <c:set var="count" value="${count+1}" />                    

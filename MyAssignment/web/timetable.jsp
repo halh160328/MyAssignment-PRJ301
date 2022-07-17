@@ -23,7 +23,6 @@
                 <p style="font-size: 36px;font-family: helvetica neue;width: 100%;height: 50px;background-color: red;margin: 0px">${l.userName}'s
                     Timetable</p>
                 </c:forEach>
-
         </div>
         <form action="timetable" method="POST">
             <div style="background-color: #f8e1ac">

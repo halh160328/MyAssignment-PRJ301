@@ -33,7 +33,6 @@ public class TimetableController extends HttpServlet {
 //    private static final String FRIDAY = "Friday";
 //    private static final String SATURDAY = "Saturday";
 //    private static final String SUNDAY = "Sunday";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -56,31 +55,35 @@ public class TimetableController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Lectuter lec = (Lectuter) session.getAttribute("lec");
-        SlotDBContext sdb = new SlotDBContext();
-        TimetableDBContext tdb = new TimetableDBContext();
-        ArrayList<Timetable> time_table = new ArrayList<>();
-        ArrayList<Slot> slots = new ArrayList<>();
-        slots = sdb.slotList();
-        time_table = tdb.listByLecID(lec.getId());
-        ArrayList<Timetable> monday = new ArrayList<>();
-        ArrayList<Timetable> tuesday = new ArrayList<>();
-        ArrayList<Timetable> wednesday = new ArrayList<>();
-        ArrayList<Timetable> thursday = new ArrayList<>();
-        ArrayList<Timetable> friday = new ArrayList<>();
-        ArrayList<Timetable> saturday = new ArrayList<>();
-        ArrayList<Timetable> sunday = new ArrayList<>();
-        divideTimeTable(time_table, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
-        request.setAttribute("Monday", monday);
-        request.setAttribute("Tuesday", tuesday);
-        request.setAttribute("Wednesday", wednesday);
-        request.setAttribute("Thursday", thursday);
-        request.setAttribute("Friday", friday);
-        request.setAttribute("Saturday", saturday);
-        request.setAttribute("Sunday", sunday);
-        session.setAttribute("timetable", time_table);
-        request.setAttribute("slots", slots);
-        request.setAttribute("lecs", session.getAttribute("lecs"));
-        request.getRequestDispatcher("timetable.jsp").forward(request, response);
+        if (lec == null) {
+            request.getRequestDispatcher("checkSession.jsp").forward(request, response);
+        } else {
+            SlotDBContext sdb = new SlotDBContext();
+            TimetableDBContext tdb = new TimetableDBContext();
+            ArrayList<Timetable> time_table = new ArrayList<>();
+            ArrayList<Slot> slots = new ArrayList<>();
+            slots = sdb.slotList();
+            time_table = tdb.listByLecID(lec.getId());
+            ArrayList<Timetable> monday = new ArrayList<>();
+            ArrayList<Timetable> tuesday = new ArrayList<>();
+            ArrayList<Timetable> wednesday = new ArrayList<>();
+            ArrayList<Timetable> thursday = new ArrayList<>();
+            ArrayList<Timetable> friday = new ArrayList<>();
+            ArrayList<Timetable> saturday = new ArrayList<>();
+            ArrayList<Timetable> sunday = new ArrayList<>();
+            divideTimeTable(time_table, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+            request.setAttribute("Monday", monday);
+            request.setAttribute("Tuesday", tuesday);
+            request.setAttribute("Wednesday", wednesday);
+            request.setAttribute("Thursday", thursday);
+            request.setAttribute("Friday", friday);
+            request.setAttribute("Saturday", saturday);
+            request.setAttribute("Sunday", sunday);
+            session.setAttribute("timetable", time_table);
+            request.setAttribute("slots", slots);
+            request.setAttribute("lecs", session.getAttribute("lecs"));
+            request.getRequestDispatcher("timetable.jsp").forward(request, response);
+        }
     }
 
     @Override

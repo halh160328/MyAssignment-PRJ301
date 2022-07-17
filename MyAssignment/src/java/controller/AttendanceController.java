@@ -41,7 +41,7 @@ public class AttendanceController extends HttpServlet {
         String cID = request.getParameter("cid");
         int gID = Integer.parseInt(request.getParameter("gid"));
         AttendanceDBContext adb = new AttendanceDBContext();
-        ArrayList<Student> studentList = adb.listStudent(cID, gID);
+        ArrayList<Attendance> studentList = adb.listStudent(cID, gID);
         ArrayList<Group> groupList = adb.groupList(gID);
         request.setAttribute("listGroup", groupList);
         request.setAttribute("listStudent", studentList);
@@ -56,11 +56,13 @@ public class AttendanceController extends HttpServlet {
         String cid = request.getParameter("cid");
         int gid = Integer.parseInt(request.getParameter("gid"));
         AttendanceDBContext adb = new AttendanceDBContext();
-        ArrayList<Student> studentList = adb.listStudent(cid, gid);
-        for (Student student : studentList) {
+        ArrayList<Attendance> studentList = adb.listStudent(cid, gid);
+        for (Attendance attendance : studentList) {
             Attendance att = new Attendance();
-            att.setStudent(student);
-            att.setAttendance(request.getParameter("attend" + student.getId()).equals("no"));
+            att.setStudent(attendance.getStudent());
+            att.setCourse(attendance.getCourse());
+            att.setGroup(attendance.getGroup());
+            att.setAttendance(request.getParameter("attend" + attendance.getStudent().getId()).equals("no"));
             att.setNote(request.getParameter("note"));
             adb.insert(att);
         }
