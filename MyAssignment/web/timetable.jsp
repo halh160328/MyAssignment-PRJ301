@@ -165,6 +165,7 @@
                     </table>
                 </div>
             </div>
+            <a href="login">Change Account </a>
         </form>
     </body>
     <footer style="padding-top: 15px">
