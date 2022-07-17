@@ -26,13 +26,13 @@ import model.Timetable;
 
 public class TimetableController extends HttpServlet {
 
-    private static final String MONDAY = "Monday";
-    private static final String TUESDAY = "Tuesday";
-    private static final String WEDNESDAY = "Wednesday";
-    private static final String THURSDAY = "Thursday";
-    private static final String FRIDAY = "Friday";
-    private static final String SATURDAY = "Saturday";
-    private static final String SUNDAY = "Sunday";
+//    private static final String MONDAY = "Monday";
+//    private static final String TUESDAY = "Tuesday";
+//    private static final String WEDNESDAY = "Wednesday";
+//    private static final String THURSDAY = "Thursday";
+//    private static final String FRIDAY = "Friday";
+//    private static final String SATURDAY = "Saturday";
+//    private static final String SUNDAY = "Sunday";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,13 +70,13 @@ public class TimetableController extends HttpServlet {
         ArrayList<Timetable> saturday = new ArrayList<>();
         ArrayList<Timetable> sunday = new ArrayList<>();
         divideTimeTable(time_table, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
-        request.setAttribute(MONDAY, monday);
-        request.setAttribute(TUESDAY, tuesday);
-        request.setAttribute(WEDNESDAY, wednesday);
-        request.setAttribute(THURSDAY, thursday);
-        request.setAttribute(FRIDAY, friday);
-        request.setAttribute(SATURDAY, saturday);
-        request.setAttribute(SUNDAY, sunday);
+        request.setAttribute("Monday", monday);
+        request.setAttribute("Tuesday", tuesday);
+        request.setAttribute("Wednesday", wednesday);
+        request.setAttribute("Thursday", thursday);
+        request.setAttribute("Friday", friday);
+        request.setAttribute("Saturday", saturday);
+        request.setAttribute("Sunday", sunday);
         session.setAttribute("timetable", time_table);
         request.setAttribute("slots", slots);
         request.setAttribute("lecs", session.getAttribute("lecs"));
@@ -104,25 +104,25 @@ public class TimetableController extends HttpServlet {
             List<Timetable> lstTimeTableSunday) {
         for (Timetable t : lstTimeTable) {
             switch (t.getDay()) {
-                case MONDAY:
+                case "Monday":
                     lstTimeTableMonday.add(t);
                     break;
-                case TUESDAY:
+                case "Tuesday":
                     lstTimeTableTuesday.add(t);
                     break;
-                case WEDNESDAY:
+                case "Wednesday":
                     lstTimeTableWednesday.add(t);
                     break;
-                case THURSDAY:
+                case "Thursday":
                     lstTimeTableThursday.add(t);
                     break;
-                case FRIDAY:
+                case "Friday":
                     lstTimeTableFriday.add(t);
                     break;
-                case SATURDAY:
+                case "Saturday":
                     lstTimeTableSaturday.add(t);
                     break;
-                case SUNDAY:
+                case "Sunday":
                     lstTimeTableSunday.add(t);
                     break;
                 default:

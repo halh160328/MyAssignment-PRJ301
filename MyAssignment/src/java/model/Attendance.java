@@ -13,6 +13,8 @@ public class Attendance {
     private Student student;
     private String note;
     private boolean attendance;
+    private Course course;
+    private Group group;
 
     public Student getStudent() {
         return student;
@@ -36,6 +38,22 @@ public class Attendance {
 
     public void setAttendance(boolean attendance) {
         this.attendance = attendance;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
 }
