@@ -23,6 +23,7 @@
         </script>
     </head>
     <body>
-        Redirect to Timetable page after <span id="timer">3</span> seconds
+        <h1 style="text-align: center"> Take Attendance Successfully </h1>
+        <h2 style="text-align: center"> Go back to Timetable page after <span id="timer">5</span> seconds </h2>
     </body>
 </html>
