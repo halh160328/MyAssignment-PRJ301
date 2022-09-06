@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script>
-            var count = 3;
+            var count = 5;
             function redirect()
             {
                 count--;

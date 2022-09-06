@@ -26,13 +26,6 @@ import model.Timetable;
 
 public class TimetableController extends HttpServlet {
 
-//    private static final String MONDAY = "Monday";
-//    private static final String TUESDAY = "Tuesday";
-//    private static final String WEDNESDAY = "Wednesday";
-//    private static final String THURSDAY = "Thursday";
-//    private static final String FRIDAY = "Friday";
-//    private static final String SATURDAY = "Saturday";
-//    private static final String SUNDAY = "Sunday";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

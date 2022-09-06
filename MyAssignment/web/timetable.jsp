@@ -47,7 +47,7 @@
                             <c:forEach items="${requestScope.slots}" var="slot">
                                 <tr>
                                     <td style="text-align: left">${slot.slotID}</td>
-                                    <c:set var="count" value="${0}" />
+                                    <c:set var="count" value="${0}"/>
                                     <c:forEach items="${requestScope.Monday}" var="monday">
                                         <c:choose>
                                             <c:when test="${slot.slotID eq (monday.slot.slotID)}">
